@@ -1,7 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VuexPersistence from "vuex-persist";
 
 Vue.use(Vuex);
+const vuexLocal = new VuexPersistence({
+  storage: window.sessionStorage
+});
 
 export default new Vuex.Store({
   strict: true,
@@ -17,6 +21,18 @@ export default new Vuex.Store({
       state.bucketName = newBucketName;
     }
   },
+  getters: {
+    GET_COUNT_ALPHA(state) {
+      switch (state.count) {
+        case 1:
+          return "One";
+        case 2:
+          return "Two";
+        default:
+          return state.count;
+      }
+    }
+  },
   actions: {
     incrementCount({ commit }) {
       commit("INCREMENT_COUNT");
@@ -25,5 +41,6 @@ export default new Vuex.Store({
       commit("SET_BUCKET_NAME", newBucketName);
     }
   },
+  plugins: [vuexLocal.plugin],
   modules: {}
 });

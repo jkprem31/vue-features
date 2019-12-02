@@ -1,6 +1,5 @@
 <script>
-import Vue from "vue";
-import { mapGetters, mapState } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "HelloWorld",
@@ -10,14 +9,11 @@ export default {
   render() {
     return (
       <div class="hello">
-        <h1>{this.vueVersion}</h1>
-        <h1>Count {this.GET_COUNT_ALPHA} </h1>
-        <input type="button" onClick={this.incrementCount} value="Increment" />
-        <h1>My Bucket Name {this.bucketName}</h1>
+        <h1>Hi {this.bucketName}</h1>
         <input type="text" v-model={this.newBucketName} />
         <input
           type="button"
-          value="Update Bucket Name"
+          value="Greet Me"
           onClick={this.updateBuacketName}
         />
       </div>
@@ -25,13 +21,11 @@ export default {
   },
   data() {
     return {
-      newBucketName: "",
-      vueVersion: Vue.version
+      newBucketName: ""
     };
   },
   computed: {
-    ...mapState(["count", "bucketName"]),
-    ...mapGetters(["GET_COUNT_ALPHA"])
+    ...mapState(["count", "bucketName"])
   },
   methods: {
     incrementCount() {
